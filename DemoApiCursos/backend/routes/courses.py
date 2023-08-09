@@ -6,7 +6,9 @@ from backend.schemas.schemacourses import SchemaCourses, SchemaGetCourses
 from backend.db.connection import get_db
 from backend.routes.login_jwt import auth_user
 
-courses = APIRouter(tags=["Courses"], dependencies=[Depends(auth_user)])
+#courses = APIRouter(tags=["Courses"], dependencies=[Depends(auth_user)])
+courses = APIRouter(tags=["Courses"])
+
 
 @courses.post("/coursesCreate", response_model=SchemaCourses, status_code=201)
 def create_courses(courses:SchemaCourses, db:Session =Depends(get_db)):     
@@ -21,13 +23,13 @@ def create_courses(courses:SchemaCourses, db:Session =Depends(get_db)):
         raise HTTPException(status_code=400, detail="El usuario ya existe")
 
 
-@courses.get("/get_courses", response_model=list[SchemaGetCourses])
+@courses.get("/get_courses", response_model=list[SchemaGetCourses], dependencies=[Depends(auth_user)])
 def get_courses(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)): 
     courses_get = db.query(Course).offset(skip).limit(limit).all()
     return courses_get
 
 
-@courses.get("/course/{course_id}", response_model=SchemaGetCourses, status_code=200)
+@courses.get("/course/{course_id}", response_model=SchemaGetCourses, status_code=200, dependencies=[Depends(auth_user)])
 def find_course(course_id: int, db: Session = Depends(get_db)): 
     find_course_id = db.query(Course).filter(Course.id == course_id).first()
     if find_course_id: 
@@ -36,7 +38,7 @@ def find_course(course_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
 
 
-@courses.delete("/courseDeleted/{course_id}", response_model=bool, status_code=200)
+@courses.delete("/courseDeleted/{course_id}", response_model=bool, status_code=200, dependencies=[Depends(auth_user)])
 def delete_course(course_id: int, db: Session = Depends(get_db)): 
     is_delete = db.query(Course).filter(Course.id == course_id).first()
     if is_delete: 
@@ -47,7 +49,7 @@ def delete_course(course_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
 
 
-@courses.put("/course_update/{course_id}", response_model=SchemaCourses, status_code=201)
+@courses.put("/course_update/{course_id}", response_model=SchemaCourses, status_code=201, dependencies=[Depends(auth_user)])
 def update_course(course_id: int, updated_course: SchemaCourses, db: Session = Depends(get_db)):
     db_course = db.query(Course).filter(Course.id == course_id).first()
     if not db_course:

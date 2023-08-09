@@ -9,13 +9,8 @@ from backend.routes.login_jwt import auth_user
 
 import datetime
 
-user = APIRouter(tags=["Users"], dependencies=[Depends(auth_user)])
-
-
-@user.get("/users", response_model=list[SchemaGetUser])
-def get_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)): 
-    users_get = db.query(User).offset(skip).limit(limit).all()
-    return users_get
+# user = APIRouter(tags=["Users"], dependencies=[Depends(auth_user)])
+user = APIRouter(tags=["Users"])
 
 
 @user.post("/user", response_model=SchemaUser, status_code=201)
@@ -31,7 +26,14 @@ def create_user(user:SchemaUser, db:Session =Depends(get_db)):
         raise HTTPException(status_code=400, detail="El usuario ya existe")
 
 
-@user.get("/user/{user_id}", response_model=SchemaUser)
+@user.get("/users", response_model=list[SchemaGetUser], dependencies=[Depends(auth_user)])
+def get_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)): 
+    users_get = db.query(User).offset(skip).limit(limit).all()
+    return users_get
+
+
+
+@user.get("/user/{user_id}", response_model=SchemaUser, dependencies=[Depends(auth_user)])
 def find_user(user_id: int, db: Session = Depends(get_db)): 
     find_user_id = db.query(User).filter(User.id == user_id).first()
     if find_user: 
@@ -40,7 +42,7 @@ def find_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
 
 
-@user.delete("/user/{user_id}", response_model=bool)
+@user.delete("/user/{user_id}", response_model=bool, dependencies=[Depends(auth_user)])
 def delete_user(user_id: int, db: Session = Depends(get_db)): 
     is_delete = db.query(User).filter(User.id == user_id).first()
     if is_delete: 
@@ -51,7 +53,7 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
 
 
-@user.put("/user/{user_id}", response_model=SchemaUser)
+@user.put("/user/{user_id}", response_model=SchemaUser, dependencies=[Depends(auth_user)])
 def update_user(user_id: int, updated_user: SchemaUser, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
     if not db_user:
