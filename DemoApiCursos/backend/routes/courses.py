@@ -4,8 +4,9 @@ from backend.db.connection import Base, SessionLocal, engine
 from backend.models.courses import Course 
 from backend.schemas.schemacourses import SchemaCourses, SchemaGetCourses
 from backend.db.connection import get_db
+from backend.routes.login_jwt import auth_user
 
-courses = APIRouter(tags=["Courses"])
+courses = APIRouter(tags=["Courses"], dependencies=[Depends(auth_user)])
 
 @courses.post("/coursesCreate", response_model=SchemaCourses, status_code=201)
 def create_courses(courses:SchemaCourses, db:Session =Depends(get_db)):     

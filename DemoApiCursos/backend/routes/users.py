@@ -5,10 +5,11 @@ from backend.models.users import User
 from backend.schemas.schemaUsers import SchemaUser, SchemaGetUser
 from backend.db.connection import get_db
 from starlette.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT
+from backend.routes.login_jwt import auth_user
 
 import datetime
 
-user = APIRouter(tags=["Users"])
+user = APIRouter(tags=["Users"], dependencies=[Depends(auth_user)])
 
 
 @user.get("/users", response_model=list[SchemaGetUser])
