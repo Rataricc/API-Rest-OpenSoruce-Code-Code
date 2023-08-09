@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "41969d5e-224a-4d08-bfec-c4cf388eb975",
+		"name": "OpenSourceCode",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17994506"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Authenticate",
+					"item": [
+						{
+							"name": "Verificacion de token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTQ0Nzc2fQ.Bo2wpf0P5A6_tjxhTzWGgbMeOHLSjb93k6J_S9AmubM"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://127.0.0.1:8000/users/me/jwt"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "Pira",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "pirata",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://127.0.0.1:8000/login_jwt"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Agregar usuario bd",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string\",\r\n  \"username\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"datetime\": \"2023-08-09T00:17:46.558Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8000/user"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar usuario por id bd",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string\",\r\n  \"username\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"datetime\": \"2023-08-09T00:17:46.558Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8000/user/10"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTU0MjM5fQ.oj64QBMx6MHRxiA4WcifF22ZQxkyBPJVVXNYqpyv_VE"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuarios por id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/user/10"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar usuario por id bd",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:8000/user/10"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Agregar curso bd",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"instructor\": \"string\",\r\n  \"category\": \"string\",\r\n  \"url\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8000/coursesCreate"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los cursos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/get_courses"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener curso por id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/course/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar curso por id bd",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:8000/courseDeleted/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar curso por id bd",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaXJhIiwiZXhwIjoxNjkxNTM3NTI1fQ.X1G_I8S-zBCFJXyi4XuNuqSY84SqCvnN_2fuggbxh_o"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"instructor\": \"string\",\r\n  \"category\": \"string\",\r\n  \"url\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8000/course_update/2"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
