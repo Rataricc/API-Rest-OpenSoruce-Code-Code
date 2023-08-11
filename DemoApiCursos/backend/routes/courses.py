@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from fastapi import APIRouter, Depends, HTTPException
 from backend.db.connection import Base, SessionLocal, engine
 from backend.models.courses import Course 
@@ -18,7 +19,7 @@ def create_courses(courses:SchemaCourses, db:Session =Depends(get_db)):
         db.commit()
         db.refresh(db_courses)
         return db_courses
-    except IntegratyError: 
+    except IntegrityError: 
         db.rollback()
         raise HTTPException(status_code=400, detail="El usuario ya existe")
 

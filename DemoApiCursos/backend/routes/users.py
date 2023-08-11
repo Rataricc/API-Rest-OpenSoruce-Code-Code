@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from fastapi import APIRouter, Depends, HTTPException, Response
 from backend.db.connection import Base, SessionLocal, engine
 from backend.models.users import User 
@@ -21,7 +22,7 @@ def create_user(user:SchemaUser, db:Session =Depends(get_db)):
         db.commit()
         db.refresh(db_user)
         return db_user
-    except IntegratyError: 
+    except IntegrityError: 
         db.rollback()
         raise HTTPException(status_code=400, detail="El usuario ya existe")
 
