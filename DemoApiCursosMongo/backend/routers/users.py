@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Response, status
 from backend.db.connection import db_client
 from backend.models.users import User
 from backend.schemas.users import user_schema, GetUser, users_get
+from bson import ObjectId
 
 router = APIRouter(tags=["Users"], prefix="/users",
                    responses={status.HTTP_404_NOT_FOUND: {"message": "No encontrado"}})
@@ -26,9 +27,31 @@ async def user_create(user: User):
 
 
 @router.get("/find_user", response_model=list[User],status_code=status.HTTP_200_OK)
-async def find_user(): 
+async def get_user(): 
     return users_get(db_client.local.user.find())
 
+
+@router.get("/find_user/{id}", response_model=User,status_code=status.HTTP_200_OK)
+async def find_user(id: str): 
+    return user_schema(db_client.local.user.find_one({"_id": ObjectId(id)}))
+
+
+
+@router.put("/update_user/{id}", response_model=User, status_code=status.HTTP_200_OK)
+async def update_user(id:str, user:User): 
+    user_update = user_schema(db_client.local.user.find_one_and_update({"_id": ObjectId(id)}, {"$set":dict(user)}))
+    user = user_schema(db_client.local.user.find_one({"_id": ObjectId(id)}))
+    return user
+
+
+@router.delete("/delete_user/{id}", response_model=bool, status_code=status.HTTP_200_OK)
+async def delete_user(id: str): 
+    is_user_delete = user_schema(db_client.local.user.find_one_and_delete({"_id": ObjectId(id)}))
+    if is_user_delete: 
+       return True
+    else: 
+        raise HTTPException(
+            status_code=status.HTTP_204_NO_CONTENT, detail="User not found")
 
 """
 @router.post("/", response_model=User, status_code=status.HTTP_201_CREATED)
