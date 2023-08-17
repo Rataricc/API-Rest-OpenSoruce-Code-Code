@@ -2,9 +2,15 @@ from pydantic import BaseModel
 from typing import Optional
 
 
-class User(BaseModel):
-    id: Optional[str]
+
+class CretaeUser(BaseModel):
+    #id: Optional[str]
     name: str
     username: str
     email: str
     password: str
+
+class User(CretaeUser):
+    id: Optional[str]
+    
+    
