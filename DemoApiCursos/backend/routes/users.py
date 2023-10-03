@@ -61,7 +61,7 @@ def update_user(user_id: int, updated_user: SchemaUser, db: Session = Depends(ge
         raise HTTPException(status_code=404, detail="User not found")
 
     db_user.name = updated_user.name
-    db_user.username = update_user.username
+    db_user.username = updated_user.username
     db_user.email = updated_user.email
     db_user.password = updated_user.password
     db.commit()
