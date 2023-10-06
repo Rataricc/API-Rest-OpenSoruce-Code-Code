@@ -12,6 +12,7 @@ from alembic import context
 from sqlmodel import SQLModel
 from app.models.users import user
 from app.models.courses import course
+from app.models.categories import category
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
