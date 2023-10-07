@@ -57,7 +57,6 @@ async def update_category_by_id(id: int, updated_category: CategoryUpdate, sessi
         if category is None:
             raise HTTPException(status_code=404, detail="Category not found")
         
-        # Actualiza los campos según los valores proporcionados
         category.name = updated_category.name
         
         session.add(category)

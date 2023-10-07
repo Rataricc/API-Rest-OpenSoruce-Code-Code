@@ -1,5 +1,27 @@
 from typing import Optional
 from sqlmodel import SQLModel, Field
+from enum import Enum
+
+class LikeState(str, Enum): 
+    NO_LIKE = "no_like"
+    LIKE = "like"
+    FAVORITO = "favorito"
+    
+    @classmethod
+    def is_valid(cls, value):
+        return any(value == item.value for item in cls)
+    
+    @classmethod
+    def is_like(cls, value):
+        return value in [cls.LIKE, cls.FAVORITO]
+
+    @classmethod
+    def is_favorito(cls, value):
+        return value == cls.FAVORITO
+
+    @classmethod
+    def is_no_like(cls, value):
+        return value == cls.NO_LIKE
 
 #Model
 class CourseBase(SQLModel):
@@ -7,6 +29,7 @@ class CourseBase(SQLModel):
     title: str = Field(index=True, max_length=254)
     description: str = Field(index=True, title="Description Course")
     url: str = Field(index=True, title="Url ubication course")
+    likestate: LikeState
     
 
 #Hereda del modelo, schemas
@@ -27,3 +50,4 @@ class CourseUpdate(SQLModel):
     title: Optional[str] = None
     description: Optional[str] = None
     url: Optional[str] = None
+    likestate: Optional[LikeState] = None
