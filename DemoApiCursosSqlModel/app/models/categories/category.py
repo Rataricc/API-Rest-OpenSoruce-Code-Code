@@ -1,9 +1,14 @@
 from typing import Optional
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field, Relationship
+from typing import List
+#from app.models.courses_category.courses_category import CoursesCategory
 
 #Model
 class CategoryeBase(SQLModel):
     name: str = Field(index=True, title="Category name ", max_length=254)
+    
+    course_id: int = Field(default=None, foreign_key="coursescategory.id")
+    #courses: List[CoursesCategory] = Relationship(back_populates="categories")
     
     
 #Hereda del modelo, schemas

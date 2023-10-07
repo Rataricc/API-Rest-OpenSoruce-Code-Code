@@ -1,6 +1,8 @@
 from typing import Optional
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field, Relationship
 from enum import Enum
+from typing import List
+#from app.models.courses_category.courses_category import CoursesCategory
 
 class LikeState(str, Enum): 
     NO_LIKE = "no_like"
@@ -30,6 +32,9 @@ class CourseBase(SQLModel):
     description: str = Field(index=True, title="Description Course")
     url: str = Field(index=True, title="Url ubication course")
     likestate: LikeState
+    
+    categories_id: int = Field(default=None, foreign_key="coursescategory.id")
+    #categories: List[CoursesCategory] = Relationship(back_populates="courses")
     
 
 #Hereda del modelo, schemas
