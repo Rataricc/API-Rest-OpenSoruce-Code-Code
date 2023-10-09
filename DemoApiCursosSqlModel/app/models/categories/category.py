@@ -7,7 +7,7 @@ from typing import List
 class CategoryeBase(SQLModel):
     name: str = Field(index=True, title="Category name ", max_length=254)
     
-    course_id: int = Field(default=None, foreign_key="coursescategory.id")
+    #course_id: int = Field(default=None, foreign_key="coursescategory.id")
     #courses: List[CoursesCategory] = Relationship(back_populates="categories")
     
     

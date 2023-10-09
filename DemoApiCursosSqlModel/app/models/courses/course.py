@@ -33,7 +33,9 @@ class CourseBase(SQLModel):
     url: str = Field(index=True, title="Url ubication course")
     likestate: LikeState
     
-    categories_id: int = Field(default=None, foreign_key="coursescategory.id")
+    user_id: int = Field(default=None, foreign_key="user.id")
+    #categories_id: int = Field(default=None, foreign_key="coursescategory.id")
+    categories: List["Categories"] = Relationship(back_populates="courses")
     #categories: List[CoursesCategory] = Relationship(back_populates="courses")
     
 
