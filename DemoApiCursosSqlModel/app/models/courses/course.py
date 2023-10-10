@@ -2,6 +2,7 @@ from typing import Optional
 from sqlmodel import SQLModel, Field, Relationship
 from enum import Enum
 from typing import List
+#from app.models.users.user import User
 #from app.models.courses_category.courses_category import CoursesCategory
 
 class LikeState(str, Enum): 
@@ -33,7 +34,8 @@ class CourseBase(SQLModel):
     url: str = Field(index=True, title="Url ubication course")
     likestate: LikeState
     
-    user_id: int = Field(default=None, foreign_key="user.id")
+    #user: List["User"] = Relationship(back_populates="courses")
+    user_id: Optional[int] = Field(default=None, foreign_key="user.id")
     #categories_id: int = Field(default=None, foreign_key="coursescategory.id")
     categories: List["Categories"] = Relationship(back_populates="courses")
     #categories: List[CoursesCategory] = Relationship(back_populates="courses")

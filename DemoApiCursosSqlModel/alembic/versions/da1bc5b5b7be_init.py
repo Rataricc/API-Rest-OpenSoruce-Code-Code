@@ -24,7 +24,7 @@ def upgrade() -> None:
     sa.Column('full_name', sqlmodel.sql.sqltypes.AutoString(length=254), nullable=False),
     sa.Column('username', sqlmodel.sql.sqltypes.AutoString(length=25), nullable=False),
     sa.Column('email', sqlmodel.sql.sqltypes.AutoString(length=45), nullable=False),
-    sa.Column('password', sqlmodel.sql.sqltypes.AutoString(length=45), nullable=False),
+    sa.Column('password', sqlmodel.sql.sqltypes.AutoString(length=254), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
